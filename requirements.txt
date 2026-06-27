@@ -1,0 +1,7 @@
+flask==3.0.3
+opencv-python==4.10.0.84
+dlib==19.24.6
+ultralytics==8.2.87
+numpy==1.26.4
+Pillow==10.4.0
+imutils==0.5.4

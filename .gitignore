@@ -1,0 +1,15 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+database.db
+static/screenshots/
+logs/violations.txt
+models/shape_predictor_68_face_landmarks.dat
+models/shape_predictor_68_face_landmarks.dat.bz2
+models/best_yolov8.pt
+*.pt
+*.dat
+*.bz2
+.env

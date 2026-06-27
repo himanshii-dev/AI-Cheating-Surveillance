@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Cheating Surveillance</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ── Top navigation bar ── -->
+  <header class="navbar">
+    <div class="navbar-brand">
+      <span class="brand-icon">◉</span>
+      <span class="brand-text">AI Cheating Surveillance</span>
+    </div>
+    <div class="navbar-meta">
+      <span class="live-badge">● LIVE</span>
+      <span id="clock" class="clock">00:00:00</span>
+    </div>
+  </header>
+
+  <!-- ── Main layout ── -->
+  <main class="dashboard">
+
+    <!-- Left column: camera feed + score -->
+    <section class="col-feed">
+
+      <div class="card camera-card">
+        <div class="card-header">
+          <span class="card-label">Live Camera Feed</span>
+          <span class="feed-dot"></span>
+        </div>
+        <div class="feed-wrapper">
+          <img id="video-feed" src="{{ url_for('video_feed') }}" alt="Live Feed" />
+        </div>
+      </div>
+
+      <!-- Suspicion score gauge -->
+      <div class="card score-card">
+        <div class="card-header">
+          <span class="card-label">Suspicion Score</span>
+        </div>
+        <div class="score-body">
+          <div class="gauge-track">
+            <div id="gauge-bar" class="gauge-bar" style="width: 0%"></div>
+          </div>
+          <div class="score-numbers">
+            <span id="score-value" class="score-value">0</span>
+            <span class="score-sep">/</span>
+            <span class="score-max">{{ alert_threshold }}</span>
+          </div>
+        </div>
+        <div id="alert-banner" class="alert-banner hidden">
+          ⚠ Suspicious Activity Detected
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Centre column: detector cards -->
+    <section class="col-status">
+
+      <div class="card status-card">
+        <div class="card-header">
+          <span class="card-label">Head Pose</span>
+        </div>
+        <div class="status-body">
+          <div class="status-icon" id="head-icon">↑</div>
+          <div id="head-text" class="status-text">Initialising…</div>
+        </div>
+      </div>
+
+      <div class="card status-card">
+        <div class="card-header">
+          <span class="card-label">Eye Movement</span>
+        </div>
+        <div class="status-body">
+          <div class="status-icon" id="eye-icon">◎</div>
+          <div id="eye-text" class="status-text">Initialising…</div>
+        </div>
+      </div>
+
+      <div class="card status-card">
+        <div class="card-header">
+          <span class="card-label">Phone Status</span>
+        </div>
+        <div class="status-body">
+          <div class="status-icon" id="phone-icon">📵</div>
+          <div id="phone-text" class="status-text">Scanning…</div>
+        </div>
+      </div>
+
+      <div class="card status-card">
+        <div class="card-header">
+          <span class="card-label">Faces in Frame</span>
+        </div>
+        <div class="status-body">
+          <div class="status-icon" id="face-icon">👤</div>
+          <div id="face-text" class="status-text">Detecting…</div>
+        </div>
+      </div>
+
+      <!-- Active violations pill list -->
+      <div class="card violations-live-card">
+        <div class="card-header">
+          <span class="card-label">Active Flags</span>
+        </div>
+        <div id="active-violations" class="pill-list">
+          <span class="pill pill-ok">All Clear</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Right column: violation log table -->
+    <section class="col-log">
+
+      <div class="card log-card">
+        <div class="card-header">
+          <span class="card-label">Recent Violations</span>
+          <button class="refresh-btn" onclick="fetchHistory()">↺ Refresh</button>
+        </div>
+        <div class="log-scroll">
+          <table class="log-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Time</th>
+                <th>Violation</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody id="violation-tbody">
+              <tr><td colspan="4" class="empty-row">No violations recorded yet.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <span>AI Cheating Surveillance System &nbsp;|&nbsp; Built with Flask · OpenCV · dlib · YOLOv8</span>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
